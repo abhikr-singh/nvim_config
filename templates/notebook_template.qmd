@@ -1,0 +1,15 @@
+---
+title: "Untitled Notebook"
+format: ipynb
+jupyter: python3
+---
+
+# 📓 My Notebook
+
+## 🧪 Setup
+```{python}
+# import statement
+```
+
+# code start
+

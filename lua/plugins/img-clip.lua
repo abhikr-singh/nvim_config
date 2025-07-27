@@ -1,12 +1,30 @@
-return {
+return { -- paste an image from the clipboard or drag-and-drop
   "HakonHarnes/img-clip.nvim",
-  event = "VeryLazy",
+  event = "BufEnter",
+  ft = { "markdown", "quarto", "latex" },
   opts = {
-    -- add options here
-    -- or leave it empty to use the default settings
+    default = {
+      dir_path = "img",
+    },
+    filetypes = {
+      markdown = {
+        url_encode_path = true,
+        template = "![$CURSOR]($FILE_PATH)",
+        drag_and_drop = {
+          download_images = false,
+        },
+      },
+      quarto = {
+        url_encode_path = true,
+        template = "![$CURSOR]($FILE_PATH)",
+        drag_and_drop = {
+          download_images = false,
+        },
+      },
+    },
   },
-  keys = {
-    -- suggested keymap
-    { "<leader>p", "<cmd>PasteImage<cr>", desc = "Paste image from system clipboard" },
-  },
+  config = function(_, opts)
+    require("img-clip").setup(opts)
+    vim.keymap.set("n", "<leader>ii", ":PasteImage<cr>", { desc = "insert [i]mage from clipboard" })
+  end,
 }
